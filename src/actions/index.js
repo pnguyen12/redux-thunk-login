@@ -27,26 +27,37 @@ export const login = (email, password) => {
         dispatch(loginPending(true));
         dispatch(loginSuccess(false));
         dispatch(loginError(null));
-    },
+   
+    // sendLoginRequest(email, password)
+    // .then((success) => {
+    //     dispatch(loginPending(false));
+    //     dispatch(loginSuccess(true));
+    // })
 
-    sendLoginRequest(email, password)
-    .then((success) => {
+    // .catch((err) => {
+    //     dispatch(isLoginPending(false));
+    //     dispatch(loginError(err))
+    // })
+
+    sendLoginRequest(email, password, error => {
         dispatch(loginPending(false));
-        dispatch(loginSuccess(true));
-    })
-
-    .catch((err) => {
-        dispatch(isLoginPending(false));
-        dispatch(loginError(err))
-    })
+        if(!error) {
+            dispatch(loginSuccess(true));
+        } else {
+            dispatch(loginError(error));
+        }
+    });
+    }
 }
 
-const sendLoginRequest = (email, password) => {
-   return new Promise((resolve, reject) => {
-    if(email === 'admin@admin.com' && password === 'password') {
-       return resolve(true);
-    } else {
-       return reject(new Error('Invalid password or email'));
-    }
-   })
+const sendLoginRequest = (email, password, callback) => {
+    setTimeout(() => {
+        if(email === 'admin@admin.com' && password === 'password') {
+            return callback(null);
+        } 
+
+        else {
+            return callback(null);
+        }
+    })
 }
