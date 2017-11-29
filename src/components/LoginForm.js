@@ -39,8 +39,8 @@ class LoginForm extends React.Component {
     }
     render() {
         let {email, password} = this.state;
-        let {isLoginSuccess} = this.props;
-        console.log("PROPS*****" + this.props.isLoginPending);
+        let {isLoginSuccess, isLoginPending, isloginError} = this.props;
+        // console.log("login error" + this.props.isloginError);
         return (
             <div className="form-wrapper" >
                 <form onSubmit={this.submit} name="login-form">
@@ -50,7 +50,9 @@ class LoginForm extends React.Component {
                     <label htmlFor="login-form"> Password </label>
                     <input onChange={this.changedPassword} type="password" />
                     <button type="submit">Login </button>
-                    {isLoginSuccess && <div>hi</div>}
+                    {isLoginSuccess && <div>You have succesfully logged in!</div>}
+                    {isLoginPending && <div>Currenting attempting to login</div>}
+                    {isloginError && <div>{isloginError.message}</div>}
                 </form>
             </div>
         )
@@ -59,9 +61,9 @@ class LoginForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-       isLoginPending: state.isLoginPending,
-       isLoginSuccess: state.isLoginSuccess,
-       isloginError: state.isloginError
+       isLoginPending: state.loginForm.isLoginPending,
+       isLoginSuccess: state.loginForm.isLoginSuccess,
+       isloginError:   state.loginForm.isLoginError
     }
 }
 

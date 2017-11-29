@@ -8,7 +8,6 @@ export default function (state = {
  {
     switch(action.type) {
         case constants.LOGIN_SUCCESS:
-        console.log("state" + state.isLoginPending);
         return Object.assign({}, state, {isLoginSuccess: action.isLoginSuccess})
 
         case constants.LOGIN_PENDING:
