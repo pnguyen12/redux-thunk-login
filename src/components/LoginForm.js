@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions/index';
+import {bindActionCreators} from 'redux';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -30,10 +31,16 @@ class LoginForm extends React.Component {
         let {email, password} = this.state;
 
         this.props.login(email, password);
+        this.setState({
+            password: '',
+            email: ''
+        })
+        console.log("after submit" , this.props)
     }
     render() {
         let {email, password} = this.state;
-        // console.log(this.props);
+        let {isLoginSuccess} = this.props;
+        console.log("PROPS*****" + this.props.isLoginPending);
         return (
             <div className="form-wrapper" >
                 <form onSubmit={this.submit} name="login-form">
@@ -43,6 +50,7 @@ class LoginForm extends React.Component {
                     <label htmlFor="login-form"> Password </label>
                     <input onChange={this.changedPassword} type="password" />
                     <button type="submit">Login </button>
+                    {isLoginSuccess && <div>hi</div>}
                 </form>
             </div>
         )
@@ -51,16 +59,17 @@ class LoginForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isLoginPending: state.isLoginPending,
-        isLoginSuccess: state.isLoginSuccess,
-        isLoginError: state.isLoginError
+       isLoginPending: state.isLoginPending,
+       isLoginSuccess: state.isLoginSuccess,
+       isloginError: state.isloginError
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         login: (email, password) => dispatch(login(email ,password))
-    }
+    };
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

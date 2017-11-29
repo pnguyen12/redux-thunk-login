@@ -27,18 +27,7 @@ export const login = (email, password) => {
         dispatch(loginPending(true));
         dispatch(loginSuccess(false));
         dispatch(loginError(null));
-   
-    // sendLoginRequest(email, password)
-    // .then((success) => {
-    //     dispatch(loginPending(false));
-    //     dispatch(loginSuccess(true));
-    // })
-
-    // .catch((err) => {
-    //     dispatch(isLoginPending(false));
-    //     dispatch(loginError(err))
-    // })
-
+ 
     sendLoginRequest(email, password, error => {
         dispatch(loginPending(false));
         if(!error) {
@@ -57,7 +46,7 @@ const sendLoginRequest = (email, password, callback) => {
         } 
 
         else {
-            return callback(null);
+            return callback(new Error("invalid email or password"));
         }
-    })
+    }, 1000 )
 }
