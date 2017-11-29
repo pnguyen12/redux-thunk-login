@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import LoginForm from './LoginForm';
 
 export default class App extends Component {
+
   render() {
     return (
-      <div>React simple starter</div>
+      <div>
+        <LoginForm />
+      </div>
     );
   }
 }
+
+
+
