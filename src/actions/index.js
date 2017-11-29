@@ -1,4 +1,4 @@
-import constants from '../constants';
+import constants from '../constants/index';
 import Promise from 'es6-promise';
 
 const loginPending = (isLoginPending) => {
