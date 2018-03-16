@@ -48,5 +48,5 @@ const sendLoginRequest = (email, password, callback) => {
         else {
             return callback(new Error("invalid email or password"));
         }
-    }, 1000 )
+    }, 2000 )
 }
